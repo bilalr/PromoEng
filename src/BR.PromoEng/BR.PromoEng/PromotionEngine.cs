@@ -83,7 +83,21 @@ namespace BR.PromoEng
                             totalprice += totalPriceOfC;
 
                         }
-                      
+                        else if (individualSKU.SKUId == 'D' || individualSKU.SKUId == 'd')
+                        {
+                            if (noOfD >= individualSKU.NoOfItems)
+                            {
+                                totalPriceOfD = ((noOfD / individualSKU.NoOfItems) * individualSKU.price) + (noOfD % individualSKU.NoOfItems * priceOfD);
+                            }
+                            else
+                            {
+                                totalPriceOfD = noOfD * priceOfD;
+
+                            }
+                            noOfD = 0;
+                            totalprice += totalPriceOfD;
+
+                        }
                         break;
                   
 
