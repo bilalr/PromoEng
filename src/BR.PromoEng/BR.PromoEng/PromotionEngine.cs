@@ -38,6 +38,7 @@ namespace BR.PromoEng
             {
                 switch (item.PromotionType)
                 {
+                    //IndivualSKU promotion type
                     case PromotionType.IndividualSKU:
                         var individualSKU = (IndividualSKU)item;
                         if (individualSKU.SKUId == 'A' || individualSKU.SKUId == 'a')

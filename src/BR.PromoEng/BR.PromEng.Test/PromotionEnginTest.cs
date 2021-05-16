@@ -118,6 +118,32 @@ namespace BR.PromEng.Test
             Assert.AreEqual(50, result);
         }
 
+        [TestMethod]
+        public void OnePromotionAndOneSKUTest()
+        {
+            //Arrange
+            var cart = new Cart()
+            {
+                SKUs = new List<SKU>()
+                {
+                    new SKU(){ID='A',Price=50},
+
+                },
+                Promotions = new List<Promotion>()
+                {
+                   new IndividualSKU(){ NoOfItems =3, SKUId='A', price=130, PromotionType= PromotionType.IndividualSKU},
+
+                }
+            };
+
+            //Act
+
+            var result = PromotionEngine.RunPromotions(cart);
+
+            // Assert
+
+            Assert.AreEqual(50, result);
+        }
 
     }
 }
