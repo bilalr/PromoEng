@@ -31,6 +31,47 @@ namespace BR.PromoEng
             decimal totalPriceOfD = 0;
             decimal totalprice = 0;
 
+
+            //looing all promotions and run thier rules.
+
+            foreach (var item in cart.Promotions.OrderBy(x => x.PromotionType))
+            {
+                switch (item.PromotionType)
+                {
+                    case PromotionType.IndividualSKU:
+                        var individualSKU = (IndividualSKU)item;
+                        if (individualSKU.SKUId == 'A' || individualSKU.SKUId == 'a')
+                        {
+                            if (noOfA >= individualSKU.NoOfItems)
+                            {
+                                totalPriceOfA = ((noOfA / individualSKU.NoOfItems) * individualSKU.price) + (noOfA % individualSKU.NoOfItems * priceOfA);
+
+                            }
+                            else
+                            {
+                                totalPriceOfA = noOfA * priceOfA;
+
+                            }
+                            noOfA = 0;
+                            totalprice = +totalPriceOfA;
+
+                        }
+                        
+                        break;
+                  
+
+                       
+                    default:
+                        break;
+
+
+                }
+
+
+            }
+
+
+            // add remaing SKU which are note consider in above promoitons loop.
             if (noOfA != 0)
             {
                 totalprice += noOfA * priceOfA;
