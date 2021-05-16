@@ -103,6 +103,7 @@ namespace BR.PromoEng
 
                     case PromotionType.CombinedSKU:
 
+                        // Add logic to combined sku
                         var combinedSKU= (CombinedSKU)item;
                         var skuA = false;
                         var skuB = false;
@@ -119,10 +120,18 @@ namespace BR.PromoEng
                             {
                                 skuB = true;
                             }
-                            
+                            else if (skuid == 'C' || skuid == 'c')
+                            {
+                                skuC = true;
+                            }
+                            else if (skuid == 'D' || skuid == 'd')
+                            {
+                                skuD = true;
+                            }
+
 
                         }
-
+                        //Combined promotion for A and B
                         if (skuA && skuB)
                         {
 
@@ -138,6 +147,84 @@ namespace BR.PromoEng
                             noOfA = 0;
                             noOfB = 0;
                         }
+                        //Combined promotion for A and C
+                        else if (skuA && skuC)
+                        {
+
+                            while (noOfA > 0 && noOfC > 0)
+                            {
+                                totalcombinedpromotionsCounter++;
+                                noOfA--;
+                                noOfC--;
+
+                            }
+
+                            totalprice += (totalcombinedpromotionsCounter * combinedSKU.price) + (noOfA * priceOfA) + (noOfC * priceOfC);
+                            noOfA = 0;
+                            noOfC = 0;
+                        }//Combined promotion for A and D
+                        else if (skuA && skuD)
+                        {
+
+                            while (noOfA > 0 && noOfD > 0)
+                            {
+                                totalcombinedpromotionsCounter++;
+                                noOfA--;
+                                noOfD--;
+
+                            }
+
+                            totalprice += (totalcombinedpromotionsCounter * combinedSKU.price) + (noOfA * priceOfA) + (noOfD * priceOfD);
+                            noOfA = 0;
+                            noOfD = 0;
+                        }//Combined promotion for C and C
+                        else if (skuB && skuC)
+                        {
+
+                            while (noOfB > 0 && noOfC > 0)
+                            {
+                                totalcombinedpromotionsCounter++;
+                                noOfB--;
+                                noOfC--;
+
+                            }
+
+                            totalprice += (totalcombinedpromotionsCounter * combinedSKU.price) + (noOfB * priceOfB) + (noOfC * priceOfC);
+                            noOfB = 0;
+                            noOfC = 0;
+                        }//Combined promotion for B and D
+                        else if (skuB && skuD)
+                        {
+
+                            while (noOfB > 0 && noOfD > 0)
+                            {
+                                totalcombinedpromotionsCounter++;
+                                noOfB--;
+                                noOfD--;
+
+                            }
+
+                            totalprice += (totalcombinedpromotionsCounter * combinedSKU.price) + (noOfB * priceOfB) + (noOfD * priceOfD);
+                            noOfB = 0;
+                            noOfD = 0;
+
+
+                        }//Combined promotion for C and D
+                        else if (skuC && skuD)
+                        {
+
+                            while (noOfC > 0 && noOfD > 0)
+                            {
+                                totalcombinedpromotionsCounter++;
+                                noOfC--;
+                                noOfD--;
+
+                            }
+
+                            totalprice += (totalcombinedpromotionsCounter * combinedSKU.price) + (noOfC * priceOfC) + (noOfD * priceOfD);
+                            noOfC = 0;
+                            noOfD = 0;
+                        }
                         break;
 
                     default:
@@ -146,9 +233,7 @@ namespace BR.PromoEng
 
                 }
 
-
             }
-
 
             // add remaing SKU which are note consider in above promoitons loop.
             if (noOfA != 0)
