@@ -245,5 +245,37 @@ namespace BR.PromEng.Test
             Assert.AreEqual(100, result);
         }
 
+        [TestMethod]
+        public void ScenarioATest_False()
+        {
+            //Arrange
+            var cartScenarioA = new Cart()
+            {
+                SKUs = new List<SKU>()
+                {
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='C',Price=20},
+
+                },
+                Promotions = new List<Promotion>()
+                {
+                   new IndividualSKU(){ NoOfItems=3, SKUId='A', price=130, PromotionType= PromotionType.IndividualSKU},
+                   new IndividualSKU(){NoOfItems=2, SKUId='B', price=45, PromotionType= PromotionType.IndividualSKU},
+                   new CombinedSKU(){ SKUIds=new List<char>{'C','D' }, price=30 , PromotionType= PromotionType.CombinedSKU},
+
+                }
+            };
+
+            //Act
+
+            var result = PromotionEngine.RunPromotions(cartScenarioA);
+
+            // Assert
+
+            Assert.AreNotEqual(500, result);
+        }
+
+
     }
 }
