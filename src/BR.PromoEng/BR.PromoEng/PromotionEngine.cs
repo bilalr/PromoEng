@@ -100,9 +100,46 @@ namespace BR.PromoEng
 
                         }
                         break;
-                  
 
-                       
+                    case PromotionType.CombinedSKU:
+
+                        var combinedSKU= (CombinedSKU)item;
+                        var skuA = false;
+                        var skuB = false;
+                        var skuC = false;
+                        var skuD = false;
+                        int totalcombinedpromotionsCounter = 0;
+                        foreach (var skuid in combinedSKU.SKUIds)
+                        {
+                            if (skuid == 'A' || skuid == 'a')
+                            {
+                                skuA = true;
+                            }
+                            else if (skuid == 'B' || skuid == 'b')
+                            {
+                                skuB = true;
+                            }
+                            
+
+                        }
+
+                        if (skuA && skuB)
+                        {
+
+                            while (noOfA > 0 && noOfB > 0)
+                            {
+                                totalcombinedpromotionsCounter++;
+                                noOfA--;
+                                noOfB--;
+
+                            }
+
+                            totalprice += (totalcombinedpromotionsCounter * combinedSKU.price) + (noOfA * priceOfA) + (noOfB * priceOfB);
+                            noOfA = 0;
+                            noOfB = 0;
+                        }
+                        break;
+
                     default:
                         break;
 

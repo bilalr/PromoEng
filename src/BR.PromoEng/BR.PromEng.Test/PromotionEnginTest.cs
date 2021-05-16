@@ -199,7 +199,7 @@ namespace BR.PromEng.Test
                 },
                 Promotions = new List<Promotion>()
                 {
-                   new CombinedSKU(){SKUIds= new List<char> { 'C', 'D' }, price=130, PromotionType= PromotionType.CombinedSKU},
+                   new CombinedSKU(){SKUIds= new List<char> { 'A', 'B' }, price=60, PromotionType= PromotionType.CombinedSKU},
 
 
                 }
