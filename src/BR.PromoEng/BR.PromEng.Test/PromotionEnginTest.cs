@@ -145,5 +145,73 @@ namespace BR.PromEng.Test
             Assert.AreEqual(50, result);
         }
 
+
+        [TestMethod]
+        public void IndividualSKUAndManySKUTest()
+        {
+            //Arrange
+            var cart = new Cart()
+            {
+                SKUs = new List<SKU>()
+                {
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='C',Price=20},
+
+
+
+                },
+                Promotions = new List<Promotion>()
+                {
+                   new IndividualSKU(){ NoOfItems=3, SKUId='A', price=130, PromotionType= PromotionType.IndividualSKU},
+
+
+                }
+            };
+
+            //Act
+
+            var result = PromotionEngine.RunPromotions(cart);
+
+            // Assert
+
+            Assert.AreEqual(180, result);
+        }
+
+        [TestMethod]
+        public void CombinedSKUAndManySKUTest()
+        {
+            //Arrange
+            var cart = new Cart()
+            {
+                SKUs = new List<SKU>()
+                {
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='C',Price=20},
+
+
+
+                },
+                Promotions = new List<Promotion>()
+                {
+                   new CombinedSKU(){SKUIds= new List<char> { 'C', 'D' }, price=130, PromotionType= PromotionType.CombinedSKU},
+
+
+                }
+            };
+
+            //Act
+
+            var result = PromotionEngine.RunPromotions(cart);
+
+            // Assert
+
+            Assert.AreEqual(180, result);
+        }
     }
 }
