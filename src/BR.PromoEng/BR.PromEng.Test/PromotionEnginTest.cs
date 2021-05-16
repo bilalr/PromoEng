@@ -396,7 +396,46 @@ namespace BR.PromEng.Test
             Assert.AreEqual(280, result);
 
         }
+        
+        [TestMethod]
+        public void ScenarioCTest_False()
+        {
 
-      
+            //Arrange
+
+            var cartScenarioC = new Cart()
+            {
+                SKUs = new List<SKU>()
+                {
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='A',Price=50},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='B',Price=30},
+                    new SKU(){ID='C',Price=20},
+                    new SKU(){ID='D',Price=15},
+
+                },
+                Promotions = new List<Promotion>()
+                {
+                   new IndividualSKU(){ NoOfItems=3, SKUId='A', price=130, PromotionType= PromotionType.IndividualSKU},
+                   new IndividualSKU(){NoOfItems=2, SKUId='B', price=45, PromotionType= PromotionType.IndividualSKU},
+                   new CombinedSKU(){ SKUIds=new List<char>{'C','D' }, price=30 , PromotionType= PromotionType.CombinedSKU},
+
+                }
+            };
+            //Act
+
+            var result = PromotionEngine.RunPromotions(cartScenarioC);
+
+            // Assert
+
+            Assert.AreNotEqual(500, result);
+
+        }
+
     }
 }
