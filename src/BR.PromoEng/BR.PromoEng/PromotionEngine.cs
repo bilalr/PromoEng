@@ -4,10 +4,18 @@ using System.Linq;
 
 namespace BR.PromoEng
 {
+    /// <summary>
+    /// This is a promotion engine class  which 
+    /// gives functionality to runs promotions. runs all active promotions. 
+    /// </summary>
     public class PromotionEngine
     {
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <returns></returns>
         public static decimal RunPromotions (Cart cart)
         {
             if (!(cart.Promotions.Count() > 0))
@@ -257,6 +265,8 @@ namespace BR.PromoEng
                 totalprice += noOfD * priceOfD;
                 noOfD += 0;
             }
+
+            //Return final total price
             return totalprice;
         }
 
