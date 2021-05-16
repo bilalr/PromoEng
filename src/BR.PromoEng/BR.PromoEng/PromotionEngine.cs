@@ -32,7 +32,7 @@ namespace BR.PromoEng
             decimal totalprice = 0;
 
 
-            //looing all promotions and run thier rules.
+            //looping all promotions and run thier rules.
 
             foreach (var item in cart.Promotions.OrderBy(x => x.PromotionType))
             {
@@ -56,7 +56,48 @@ namespace BR.PromoEng
                             totalprice = +totalPriceOfA;
 
                         }
-                        
+                        else if (individualSKU.SKUId == 'B' || individualSKU.SKUId == 'b')
+                        {
+                            if (noOfB >= individualSKU.NoOfItems)
+                            {
+                                totalPriceOfB = ((noOfB / individualSKU.NoOfItems) * individualSKU.price) + (noOfB % individualSKU.NoOfItems * priceOfB);
+                            }
+                            else
+                            {
+                                totalPriceOfB = noOfB * priceOfB;
+                            }
+                            noOfB = 0;
+                            totalprice += totalPriceOfB;
+                        }
+                        else if (individualSKU.SKUId == 'C' || individualSKU.SKUId == 'c')
+                        {
+                            if (noOfC >= individualSKU.NoOfItems)
+                            {
+                                totalPriceOfC = ((noOfC / individualSKU.NoOfItems) * individualSKU.price) + (noOfC % individualSKU.NoOfItems * priceOfC);
+                            }
+                            else
+                            {
+                                totalPriceOfC = noOfC * priceOfC;
+                            }
+                            noOfC = 0;
+                            totalprice += totalPriceOfC;
+
+                        }
+                        else if (individualSKU.SKUId == 'D' || individualSKU.SKUId == 'd')
+                        {
+                            if (noOfD >= individualSKU.NoOfItems)
+                            {
+                                totalPriceOfD = ((noOfD / individualSKU.NoOfItems) * individualSKU.price) + (noOfD % individualSKU.NoOfItems * priceOfD);
+                            }
+                            else
+                            {
+                                totalPriceOfD = noOfD * priceOfD;
+
+                            }
+                            noOfD = 0;
+                            totalprice += totalPriceOfD;
+
+                        }
                         break;
                   
 
