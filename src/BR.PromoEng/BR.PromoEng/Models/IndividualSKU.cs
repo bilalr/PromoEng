@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace BR.PromoEng.Models
 {
+    /// <summary>
+    /// Promotion type
+    /// 
+    /// </summary>
+
     public class IndividualSKU  : Promotion
     {
         public int NoOfItems { get; set; }
